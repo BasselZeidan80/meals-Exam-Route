@@ -1,0 +1,29 @@
+body{
+    background-color: #333;
+    color: #fff;
+}
+
+.details .container-fluid{
+    display:flex;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    align-items:center;
+    justify-content:center;
+    padding: 20px;
+}
+
+.details .image{
+    width: 30%;
+    background-color: #fff;
+}
+
+.mealDetails{
+    padding: 30px;
+    width:60%;
+}
+
+.cstSp{
+    background-color: #CFF4FC;
+    padding: 5px 10px;
+    color: #000;
+}
