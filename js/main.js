@@ -1,18 +1,14 @@
 /// <reference types="../@types/jquery" />
 
-var emailRegex = /^[a-zA-Z0-9]{3,30}@[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}$/;
-var passRegex = /^[A-z0-9@#$_!-]{8,}$/;
-var userRegex = /^[a-zA-Z0-9]{3,25}$/;
+// var validText = document.getElementById("valid");
+// var invalidText = document.getElementById("invalid");
+// var msg_Error = document.getElementById("msg-error");
 
-var validText = document.getElementById("valid");
-var invalidText = document.getElementById("invalid");
-var msg_Error = document.getElementById("msg-error");
+// var arrList = [];
 
-var arrList = [];
-
-if (localStorage.getItem("Users") != null) {
-  arrList = JSON.parse(localStorage.getItem("Users"));
-}
+// if (localStorage.getItem("Users") != null) {
+//   arrList = JSON.parse(localStorage.getItem("Users"));
+// }
 //-------------- menu Aria---------------------------
 
 let menuIcon = document.getElementById("menuIcon");
@@ -123,12 +119,6 @@ Home.addEventListener("click", function () {
 
 // ------------ Categories section------------
 // -----------------------NEW edit category filter---------------------------
-async function filterCat(meal) {
-  const api = `www.themealdb.com/api/json/v1/1/filter.php?c=${meal}`;
-  const response = await fetch(api);
-  let finalRes = await response.json();
-  console.log(finalRes);
-}
 
 // ---------------------------------
 
@@ -149,8 +139,10 @@ function displayCat() {
     conatin += `
     
     
-    <div class="col-lg-3 p-2">
-    <div class="card "   >
+    <div class="col-lg-3 p-2 onclick="filterCat('${
+      categoriesData[i].strCategory
+    }')">
+    <div class="card " id='catFilter'  >
         <img src="${
           categoriesData[i].strCategoryThumb
         }" class="w-100" alt="Food">
@@ -165,6 +157,11 @@ function displayCat() {
     `;
   }
   document.getElementById("rowDataC").innerHTML = conatin;
+
+  // let catFilter = document.getElementById("catFilter");
+  // catFilter.addEventListener("click", function () {
+  //   console.log("hiii");
+  // });
 }
 
 const Categories = document.getElementById("Categories");
@@ -182,7 +179,25 @@ Categories.addEventListener("click", function () {
   getCategoryApi();
 });
 
+async function filterCat(cateName) {
+  const api = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${cateName}`;
+  const response = await fetch(api);
+  let finalRes = await response.json();
+  console.log(finalRes);
+  displayCat();
+}
+
 // ----------------------------------
+
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
 
 // ---------------------Aria-----------------
 const Area = document.getElementById("Area");
@@ -232,6 +247,7 @@ function displayArea() {
   }
   document.getElementById("rowDataA").innerHTML = conatiner;
 }
+
 // --------------------- End Aria-----------------
 
 //  ------------Start section ingredients------------------
@@ -295,113 +311,7 @@ function displayIngredients() {
 // -------------------------
 // -------------------------
 
-// let mealsData = []; // Your meal data, fetched from API or elsewhere
-
-// // Simulating fetching data (replace with your API call)
-// function fetchMealsData() {
-//   // Replace this with your API call
-//   mealsData = [
-//     {
-//       id: 1,
-//       name: "Meal 1",
-//       description: "Description 1",
-//       ingredients: ["Ingredient 1", "Ingredient 2"],
-//     },
-//     {
-//       id: 2,
-//       name: "Meal 2",
-//       description: "Description 2",
-//       ingredients: ["Ingredient 3", "Ingredient 4"],
-//     },
-//     // ... add more meals
-//   ];
-
-//   displayMeals();
-// }
-
-// function displayMeals() {
-//   const mealContainer = document.getElementById("meal-container");
-//   mealContainer.innerHTML = "";
-
-//   mealsData.forEach((meal) => {
-//     const mealCard = document.createElement("div");
-//     mealCard.className = "meal-card";
-//     mealCard.textContent = meal.name;
-
-//     mealCard.addEventListener("click", () => {
-//       displayMealDetails(meal);
-//     });
-
-//     mealContainer.appendChild(mealCard);
-//   });
-// }
-
-// function displayMealDetails(meal) {
-//   const mealDetailsContainer = document.getElementById("meal-details");
-//   mealDetailsContainer.innerHTML = "";
-
-//   const mealName = document.createElement("h2");
-//   mealName.textContent = meal.name;
-
-//   const mealDescription = document.createElement("p");
-//   mealDescription.textContent = meal.description;
-
-//   const ingredientsTitle = document.createElement("h3");
-//   ingredientsTitle.textContent = "Ingredients";
-
-//   const ingredientsList = document.createElement("ul");
-//   meal.ingredients.forEach((ingredient) => {
-//     const ingredientItem = document.createElement("li");
-//     ingredientItem.textContent = ingredient;
-//     ingredientsList.appendChild(ingredientItem);
-//   });
-
-//   mealDetailsContainer.appendChild(mealName);
-//   mealDetailsContainer.appendChild(mealDescription);
-//   mealDetailsContainer.appendChild(ingredientsTitle);
-//   mealDetailsContainer.appendChild(ingredientsList);
-// }
-
-// // Initial data fetch and display
-// fetchMealsData();
-
-// ----------------------Contacts-------------------
-
 let Contact = document.getElementById("Contact");
-
-let contactSection = document.getElementById("contactSection");
-let inpName = document.getElementById("inpName");
-let inpEmail = document.getElementById("inpEmail");
-let inpPhone = document.getElementById("inpPhone");
-let inpAge = document.getElementById("inpAge");
-let inpPassword = document.getElementById("inpPassword");
-let inpRePassword = document.getElementById("inpRePassword");
-
-function clearForm() {
-  inpName.value = "";
-  inpEmail.value = "";
-  inpPhone.value = "";
-  inpAge.value = "";
-  inpPassword.value = "";
-  inpRePassword.value = "";
-}
-
-function validationUser() {
-  var msgErr = document.getElementById("msgErr");
-  var user = userName.value;
-
-  if (userRegex.test(user) == true) {
-    userName.classList.add("is-valid");
-    userName.classList.remove("is-invalid");
-    msgErr.classList.add("d-none");
-  } else {
-    msgErr.classList.remove("d-none");
-
-    userName.classList.add("is-invalid");
-    userName.classList.remove("is-valid");
-  }
-  clearValidation();
-}
 
 Contact.addEventListener("click", function () {
   heroSection.classList.add("d-none");
@@ -413,97 +323,38 @@ Contact.addEventListener("click", function () {
   contactSection.classList.remove("d-none");
 });
 
-let submitBtn = document.getElementById("submitBtn");
-submitBtn.addEventListener("click", function () {
-  console.log("hii contacts");
+document.getElementById("myForm").addEventListener("input", function () {
+  var username = document.getElementById("username").value;
+  var email = document.getElementById("email").value;
+  var phone = document.getElementById("phone").value;
+  var age = document.getElementById("age").value;
+  var password = document.getElementById("password").value;
+  var repassword = document.getElementById("repassword").value;
 
-  var contacts = {
-    name: inpName.value,
-    email: inpEmail.value,
-    phone: inpPhone.value,
-    age: inpAge.value,
-    password: inpPassword.value,
-    rePassword: inpRePassword.value,
-  };
-  console.log(contacts);
+  var usernamePattern = /[A-Za-z0-9]+/;
+  var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+  var phonePattern = /\d{10}/;
+  var agePattern = /^\d+$/;
+  var passwordPattern = /.{6,}/;
 
-  if (ValidationInputs() == true) {
-    if (arrList.length == 0) {
-      arrList.push(contacts);
-      localStorage.setItem("Users", JSON.stringify(arrList));
-    } else {
-      var exist = false;
-      for (var i = 0; i < arrList.length; i++) {
-        // console.log(arrList[i].email, email.value);
+  var isUsernameValid = usernamePattern.test(username);
+  var isEmailValid = emailPattern.test(email);
+  var isPhoneValid = phonePattern.test(phone);
+  var isAgeValid = agePattern.test(age);
+  var isPasswordValid = passwordPattern.test(password);
+  var isRepasswordValid = repassword === password;
 
-        if (arrList[i].email == inpEmail.value) {
-          // alert("exist");
-          console.log("exist");
-
-          exist = true;
-          break;
-        }
-      }
-      if (exist) {
-        msg_Error.classList.remove("d-none");
-        validText.classList.add("d-none");
-      } else {
-        arrList.push(contacts);
-        localStorage.setItem("Users", JSON.stringify(arrList));
-        console.log("pushed");
-      }
-    }
-  }
-
-  clearForm();
+  var submitButton = document.getElementById("submitButton");
+  submitButton.disabled = !(
+    isUsernameValid &&
+    isEmailValid &&
+    isPhoneValid &&
+    isAgeValid &&
+    isPasswordValid &&
+    isRepasswordValid
+  );
+  console.log("data is correct  ");
 });
-
-function clearValidation() {
-  var msgErr = document.getElementById("msgErr");
-  var msgErrEmail = document.getElementById("msgErrEmail");
-
-  var user = userName.value;
-
-  var EEmail = email.value;
-
-  if (user.length == 0) {
-    msgErr.classList.add("d-none");
-  }
-
-  if (EEmail.length == 0) {
-    msgErrEmail.classList.add("d-none");
-  }
-}
-
-function validationEmail() {
-  var EEmail = inpEmail.value;
-  var msgErrEmail = document.getElementById("msgErrEmail");
-  if (emailRegex.test(EEmail) == true) {
-    msgErrEmail.classList.add("d-none");
-  } else {
-    msgErrEmail.classList.remove("d-none");
-  }
-  clearValidation();
-}
-////////////////////Validation/////////
-
-////////////////////End Validation/////////
-function ValidationInputs() {
-  if (
-    emailRegex.test(inpEmail.value) == true &&
-    passRegex.test(inpPassword.value) == true &&
-    userRegex.test(inpName.value) == true
-  ) {
-    console.log("hello", inpName.value);
-    validText.classList.remove("d-none");
-    invalidText.classList.add("d-none");
-    return true;
-  } else {
-    invalidText.classList.remove("d-none");
-    validText.classList.add("d-none");
-    return false;
-  }
-}
 
 // ----------------------End Contacts-------------------
 

@@ -112,7 +112,7 @@
             <div class="inputs">
                 <input oninput="searchByName()" id="searchInputName" type="text"
                     class="form-control w-50 bg-dark mt-5 p-3 text-light" placeholder="Search by Name">
-                <input oninput="searchByName()" id="searchInputLetter" type="text"
+                <input oninput="searchByName()" id="searchInputLetter" maxlength="1" type="text"
                     class="form-control w-50 bg-dark mt-5 p-3 text-light" placeholder="Search by First Letter">
             </div>
 
@@ -173,19 +173,33 @@
 
 
                     <div class="col-lg-3 p-2">
-                        <div class="card">
+
+                        <div id="categoriesContainer"></div>
+                        <div id="mealsContainer" class="meals-container"></div>
+
+
+
+
+                        <!-- <div class="card">
                             <img src="images/meal.jpg" class="w-100" alt="Food">
                             <div class="layer   ">
 
                                 <h5 class=" fs-3 fw-bold">food</h5>
                                 <p>Lorem ipsum dolor sit amet.</p>
                             </div>
-                        </div>
+                        </div> -->
+
+                        <!-- <div id="categoriesContainer"></div>
+                        <div id="mealsContainer" class="meals-container"></div> -->
                     </div>
 
 
 
                 </div>
+
+
+
+
 
             </div>
         </div>
@@ -311,57 +325,77 @@
 
     <!-- Start Contacts -->
 
+
+
+
     <section id="contactSection" class="contacts d-none">
         <div class="container  mt-5">
+            <form id="myForm">
+                <div class="row  m-auto   ">
+                    <div class=" col-sm-12 col-lg-6 p-3 ">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" pattern="[A-Za-z0-9]+" required>
+                    </div>
+                    <div class=" col-sm-12 col-lg-6 p-3 ">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class=" col-sm-12 col-lg-6 p-3 ">
+                        <label for="phone">Phone:</label>
+                        <input type="tel" id="phone" name="phone" pattern="\d{10}" required>
+                    </div>
+                    <div class=" col-sm-12 col-lg-6 p-3 ">
+                        <label for="age">Age:</label>
+                        <input type="number" id="age" name="age" min="18" required>
+                    </div>
+                    <div class=" col-sm-12 col-lg-6 p-3 ">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" pattern=".{6,}" required>
+                    </div>
+                    <div class=" col-sm-12 col-lg-6 p-3 ">
+                        <label for="repassword">Confirm Password:</label>
+                        <input type="password" id="repassword" name="repassword" pattern=".{6,}" required>
+                    </div>
 
-            <div class="row  m-auto   ">
-                <div class=" col-sm-12 col-lg-6 p-3 ">
-                    <input id="inpName" type="text" class="form-control" placeholder="Enter Your name"
-                        aria-label="Enter Your name">
+                    <button type="submit" id="submitButton" disabled>Submit</button>
+
                 </div>
+            </form>
 
 
-                <p class="text-danger d-none" id="msgErr">more Than 3 ch without space</p>
-
-
-                <div class="col-sm-12 col-lg-6  p-3">
-                    <input id="inpEmail" type="email" class="form-control" placeholder="Enter Your email"
-                        aria-label="Enter Your email">
-
-
-                </div>
-
-                <p class="text-danger d-none" id="msgErrEmail">Should Follow Email Format</p>
-
-                <p id="msg-error" class="text-danger d-none">
-                    email is already taken
-                </p>
-
-                <div class=" col-sm-12 col-lg-6  p-3">
-                    <input id="inpPhone" type="number" class="form-control" placeholder="Enter Your Phone"
-                        aria-label="Enter Your Phone">
-                </div>
-                <div class="col-sm-12 col-lg-6  p-3">
-                    <input id="inpAge" type="number" class="form-control" placeholder="Enter Your Age"
-                        aria-label="Enter Your Age">
-                </div>
-                <div class=" col-sm-12 col-lg-6  p-3">
-                    <input id="inpPassword" type="number" class="form-control" placeholder="Enter Your Password"
-                        aria-label="Enter Your Password">
-                </div>
-                <div class="col-sm-12 col-lg-6  p-3">
-                    <input id="inpRePassword" type="number" class="form-control" placeholder=" Re Password"
-                        aria-label="Re Password">
-                </div>
-
-                <div class="SubmitBtn">
-                    <button class="btn btn-outline-danger" id="submitBtn">Submit</button>
-                </div>
-            </div>
-
-
-        </div>
     </section>
+
+
+
+
+
+
+
+
+
+
+    <!-- aria-label="Enter Your Phone">
+    </div>
+    <div class="col-sm-12 col-lg-6  p-3">
+        <input id="inpAge" type="number" class="form-control" placeholder="Enter Your Age" aria-label="Enter Your Age">
+    </div>
+    <div class=" col-sm-12 col-lg-6  p-3">
+        <input id="inpPassword" type="number" class="form-control" placeholder="Enter Your Password"
+            aria-label="Enter Your Password">
+    </div>
+    <div class="col-sm-12 col-lg-6  p-3">
+        <input id="inpRePassword" type="number" class="form-control" placeholder=" Re Password"
+            aria-label="Re Password">
+    </div>
+
+    <div class="SubmitBtn">
+        <button class="btn btn-outline-danger" id="submitBtn">Submit</button>
+    </div>
+    </div>
+
+
+    </div>
+    </section> --> -->
     <!-- End Contacts -->
 
 
